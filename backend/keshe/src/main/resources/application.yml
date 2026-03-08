@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  docker:
+    compose:
+      enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 👇 重点是在最后加上 &allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/自己数据库?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: #
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: .......@qq.com
+    password: ..........
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.tayutadehsi.keshe.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #支付宝沙盒自己搜教程去配
+alipay:
+  appId: #
+  privateKey: #
+
+  gateway: openapi-sandbox.dl.alipaydev.com
+  #需要去做内网穿透，自己搜教程去配
+
+  notifyUrl: #写内网穿透后的域名，配合沙箱支付使用的
+
+  #  修正点 3：加上 http://
+  returnUrl: http://localhost:5173

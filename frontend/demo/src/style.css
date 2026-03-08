@@ -1,0 +1,66 @@
+/* 1. 全局重置，防止不同浏览器的默认边距干扰 */
+:root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. 核心修复：强制显示滚动条槽位，防止左右跳动 */
+html {
+    overflow-y: scroll; /* 暴力方案：永远预留滚动条位置 */
+    height: 100%;
+}
+
+/* 3. 核心修复：移除默认的 Flex 居中，改为正常文档流 */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block; /* 改回 block，不再强制居中 */
+}
+
+/* 4. 确保 Vue 根节点占满屏幕 */
+#app {
+    width: 100%;
+    height: 100%;
+    /* 移除 max-width 和 padding，让页面铺满 */
+    margin: 0;
+    padding: 0;
+    text-align: left; /* 恢复左对齐 */
+}
+
+/* 5. 全局盒模型，防止 padding 撑大盒子 */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+/* 6. 链接和按钮样式保留 (Vite 默认的挺好看) */
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+a:hover {
+    color: #535bf2;
+}
+
+/* 适配浅色模式 */
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+}
